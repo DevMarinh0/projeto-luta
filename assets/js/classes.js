@@ -34,3 +34,36 @@ class Mago extends Personagem {
     this.maxLife = this.life;
   }
 }
+class pequenoMonstro extends Personagem {
+  constructor() {
+    super("Pequeno Monstro");
+    this.life = 50;
+    this.attack = 5;
+    this.defense = 5;
+    this.maxLife = this.life;
+  }
+}
+class grandeMonstro extends Personagem {
+  constructor() {
+    super("Grande Monstro");
+    this.life = 120;
+    this.attack = 15;
+    this.defense = 6;
+    this.maxLife = this.life;
+  }
+}
+class cenario {
+  constructor(lutador1, lutador2, lutador1Element, lutador2Element) {
+    this.lutador1 = lutador1;
+    this.lutador2 = lutador2;
+    this.lutador1Element = lutador1Element;
+    this.lutador2Element = lutador2Element;
+  }
+  comecarLuta() {
+    this.atualizar();
+  }
+  atualizar() {
+    this.lutador1Element.querySelector(".name").innerHTML = this.lutador1.nome;
+    this.lutador2Element.querySelector(".name").innerHTML = this.lutador2.nome;
+  }
+}
