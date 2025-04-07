@@ -1,0 +1,23 @@
+.area-luta {
+  display: flex;
+  gap: 20px;
+}
+#hero,
+#monster {
+  flex: 1;
+}
+.barra-vida {
+  height: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+.barra-vida .bar {
+  height: inherit;
+  background-color: red;
+  border-radius: 5px;
+}
+.log {
+  border: 1px dotted #999;
+  height: 250px;
+  overflow-y: scroll;
+}
