@@ -34,7 +34,7 @@ class Mago extends Personagem {
     this.maxLife = this.life;
   }
 }
-class pequenoMonstro extends Personagem {
+class PequenoMonstro extends Personagem {
   constructor() {
     super("Pequeno Monstro");
     this.life = 50;
@@ -43,7 +43,7 @@ class pequenoMonstro extends Personagem {
     this.maxLife = this.life;
   }
 }
-class grandeMonstro extends Personagem {
+class GrandeMonstro extends Personagem {
   constructor() {
     super("Grande Monstro");
     this.life = 120;
@@ -52,12 +52,13 @@ class grandeMonstro extends Personagem {
     this.maxLife = this.life;
   }
 }
-class cenario {
-  constructor(lutador1, lutador2, lutador1Element, lutador2Element) {
+class Cenario {
+  constructor(lutador1, lutador2, lutador1Element, lutador2Element, logObject) {
     this.lutador1 = lutador1;
     this.lutador2 = lutador2;
     this.lutador1Element = lutador1Element;
     this.lutador2Element = lutador2Element;
+    this.log = logObject;
   }
   comecarLuta() {
     this.atualizar();
@@ -76,27 +77,27 @@ class cenario {
   }
   atualizar() {
     //lutador 1
-    this.lutador1Element.querySelector(
-      ".name"
-    ).innerHTML = `${this.lutador1.nome} -  ${this.lutador1.life} HP`;
+    this.lutador1Element.querySelector(".name").innerHTML = `${
+      this.lutador1.nome
+    } -  ${this.lutador1.life.toFixed(1)} HP`;
     let l1Porcent = (this.lutador1.life / this.lutador1.maxLife) * 100;
     this.lutador1Element.querySelector(".bar").style.width = `${l1Porcent}%`;
     //lutador 2
-    this.lutador2Element.querySelector(
-      ".name"
-    ).innerHTML = `${this.lutador2.nome} -  ${this.lutador2.life} HP`;
+    this.lutador2Element.querySelector(".name").innerHTML = `${
+      this.lutador2.nome
+    } -  ${this.lutador2.life.toFixed(1)} HP`;
     let l2Porcent = (this.lutador2.life / this.lutador2.maxLife) * 100;
     this.lutador2Element.querySelector(".bar").style.width = `${l2Porcent}%`;
   }
   fazerAttack(atacando, atacado) {
     //se alguem morrer, não faz nada
     if (atacando.life <= 0 || atacado.life <= 0) {
-      console.log("Luta encerrada!");
+      this.log.addMensagem("Luta encerrada!");
       return;
     }
 
     let ataqueFactor = (Math.random() * 1).toFixed(2);
-    let defesaFactor = (Math.random() * 1).toFixed(2); // 0.5 a 1.5
+    let defesaFactor = (Math.random() * 1).toFixed(2);
 
     let ataqueAtual = atacando.attack * ataqueFactor;
     let defesaAtual = atacado.defense * defesaFactor;
@@ -104,19 +105,32 @@ class cenario {
     if (ataqueAtual > defesaAtual) {
       let dano = ataqueAtual - defesaAtual;
       atacado.life -= dano;
-      console.log(
+      this.log.addMensagem(
         `${atacando.nome} atacou ${atacado.nome} e causou ${dano.toFixed(
           2
         )} de dano`
       );
     } else {
-      console.log(
-        `${atacando.nome} conseguiu Defender o ataque de ${atacado.nome}`
+      this.log.addMensagem(
+        `${atacado.nome} conseguiu Defender o ataque de ${atacando.nome}`
       );
     }
-    console.log(
-      `${atacando.nome} atacou ${atacado.nome} com ${atacando.attack} de ataque`
-    );
     this.atualizar();
+  }
+}
+class Log {
+  lista = [];
+  constructor(listaElement) {
+    this.listaElement = listaElement;
+  }
+  addMensagem(mensagem) {
+    this.lista.push(mensagem);
+    this.mostrar();
+  }
+  mostrar() {
+    this.listaElement.innerHTML = "";
+    for (let i in this.lista) {
+      this.listaElement.innerHTML += `<li>${this.lista[i]}</li>`;
+    }
   }
 }

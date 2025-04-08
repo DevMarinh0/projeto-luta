@@ -1,13 +1,11 @@
+let log = new Log(document.querySelector(".log"));
 let personagem = new Guerreiro("Bruninho");
-// console.log(personagem.nome);
-// console.log(personagem.life);
-let monstro = new pequenoMonstro();
-// console.log(monstro.nome);
-// console.log(monstro.life);
-const stage = new cenario(
+let monstro = new PequenoMonstro();
+const stage = new Cenario(
   personagem,
   monstro,
   document.querySelector("#hero"),
-  document.querySelector("#monster")
+  document.querySelector("#monster"),
+  log
 );
 stage.comecarLuta();

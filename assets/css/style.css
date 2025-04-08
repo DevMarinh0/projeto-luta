@@ -1,23 +1,106 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+/* Plano de fundo do jogo */
+body {
+  background: linear-gradient(to bottom, #1f1c2c, #928dab);
+  color: #fff;
+  padding: 40px;
+}
+
+/* Área principal de combate */
 .area-luta {
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
+
+/* Herói e monstro */
 #hero,
 #monster {
   flex: 1;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
 }
+
+/* Nome do personagem */
+.name {
+  display: block;
+  font-size: 1.5em;
+  margin: 15px 0;
+  color: #ffcc00;
+  text-shadow: 1px 1px 2px #000;
+}
+
+/* Barra de vida */
 .barra-vida {
-  height: 10px;
-  border: 1px solid #000;
-  border-radius: 5px;
+  height: 25px;
+  background-color: #333;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 10px;
 }
+
 .barra-vida .bar {
-  height: inherit;
-  background-color: red;
-  border-radius: 5px;
+  height: 100%;
+  background: linear-gradient(90deg, #ff0000, #cc0000);
+  transition: width 0.5s ease-in-out;
 }
+
+/* Botão de ataque */
+.attackButton {
+  padding: 10px 25px;
+  background-color: #ff4500;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 10px;
+}
+
+.attackButton:hover {
+  background-color: #ff6347;
+  transform: scale(1.05);
+}
+
+.attackButton:active {
+  transform: scale(0.95);
+}
+
+/* Log de combate */
 .log {
-  border: 1px dotted #999;
+  margin-top: 30px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px dashed #ccc;
   height: 250px;
-  overflow-y: scroll;
+  overflow-y: auto;
+  color: #0f0;
+  font-family: "Courier New", monospace;
+  font-size: 0.95em;
+  border-radius: 10px;
+  box-shadow: inset 0 0 10px #000;
+}
+
+/* Estilo para cada item de log (opcional, se forem <li>) */
+.log li {
+  margin-bottom: 8px;
+  list-style: none;
 }
